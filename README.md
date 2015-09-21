@@ -12,6 +12,7 @@ This is a guide for writing consistent and aesthetically pleasing node.js code. 
 * [Method chaining](#method-chaining)
 * [Functions](#functions)
 * [Requires](#requires)
+* [Always check for errors in callbacks]()
 * [Declare one variable per var statement](#declare-one-variable-per-var-statement)
 * [Use lowerCamelCase for variables, properties and function names](#use-lowercamelcase-for-variables-properties-and-function-names)
 * [Use UpperCamelCase for class names](#use-uppercamelcase-for-class-names)
@@ -248,6 +249,95 @@ while (keys.length) {
 ```
 
 [crockfordconvention]: http://javascript.crockford.com/code.html
+
+## Always check for errors in callbacks
+
+Always check for errors and return if any errors in callbacks
+
+```js
+//bad
+database.get('pokemons', function(err, pokemons) {
+  console.log(pokemons);
+});
+
+//good
+database.get('drabonballs', function(err, drabonballs) {
+  if (err) {
+    // handle the error somehow, maybe return with a callback
+    return console.log(err);
+  }
+  console.log(drabonballs);
+});
+```
+
+## Only throw in synchronous functions
+
+Try-catch blocks cannot be used to wrap async code. They will bubble up to to the top, and bring down the entire process.
+
+```js
+//bad
+function readPackageJson (callback) {
+  fs.readFile('package.json', function(err, file) {
+    if (err) {
+      throw err;
+    }
+    ...
+  });
+}
+
+//good
+function readPackageJson (callback) {
+  fs.readFile('package.json', function(err, file) {
+    if (err) {
+      // Return the callback error
+      return  callback(err);
+    }
+    ...
+  });
+}
+```
+
+## Catch errors in sync calls
+
+```js
+//bad
+var data = JSON.parse(jsonAsAString);
+
+//good
+var data;
+try {
+  data = JSON.parse(jsonAsAString);
+} catch (e) {
+  //handle error - hopefully not with a console.log ;)
+  console.log(e);
+}
+```
+
+## Use **FIXME:** and **TODO:** comment to annotate problems
+
+Prefixing your comments with **FIXME** or **TODO** helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented.
+
+* Use `// FIXME:` to annotate problems
+```js
+function Calculator() {
+
+  // FIXME: shouldn't use a global here
+  total = 0;
+
+  return this;
+}
+```
+
+* Use `// TODO:` to annotate solutions to problems
+```js 
+function Calculator() {
+
+  // TODO: total should be configurable by an options param
+  this.total = 0;
+
+  return this;
+}
+```
 
 ## Use lowerCamelCase for variables, properties and function names
 
