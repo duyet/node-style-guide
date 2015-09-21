@@ -10,6 +10,8 @@ This is a guide for writing consistent and aesthetically pleasing node.js code. 
 * [Use single quotes](#use-single-quotes)
 * [Opening braces go on the same line](#opening-braces-go-on-the-same-line)
 * [Method chaining](#method-chaining)
+* [Functions](#functions)
+* [Requires](#requires)
 * [Declare one variable per var statement](#declare-one-variable-per-var-statement)
 * [Use lowerCamelCase for variables, properties and function names](#use-lowercamelcase-for-variables-properties-and-function-names)
 * [Use UpperCamelCase for class names](#use-uppercamelcase-for-class-names)
@@ -128,6 +130,88 @@ User.findOne({ name: 'foo' }).populate('bar')
     return true;
   });
 ````
+
+## Functions
+
+* Function expressions:
+```js
+// anonymous function expression
+var anonymous = function() {
+  return true;
+};
+
+// named function expression
+var named = function named() {
+  return true;
+};
+
+// immediately-invoked function expression (IIFE)
+(function() {
+  console.log('Welcome to the Internet. Please follow me.');
+})();
+```
+
+* Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead.
+```js
+// bad
+if (currentUser) {
+  function test() {
+    console.log('Nope.');
+  }
+}
+
+// good
+var test;
+if (currentUser) {
+  test = function test() {
+    console.log('Yup.');
+  };
+}
+```
+
+* Never name a parameter arguments, this will take precedence over the arguments object that is given to every function scope.
+```js
+// bad
+function nope(name, options, arguments) {
+  // ...stuff...
+}
+
+// good
+function yup(name, options, args) {
+  // ...stuff...
+}
+```
+
+## Requires
+* Organize your node requires in the following order:
+  * core modules  
+  * npm modules
+  * others
+  
+```js
+// good
+var http = require('http');
+var fs = require('fs');
+
+var async = require('async');
+var mongoose = require('mongoose');
+
+var Car = require('./models/Car');
+
+
+// bad
+var Car = require('./models/Car');
+var async = require('async');
+var http = require('http');
+```
+* Do not use the .js when requiring modules
+```js
+  // bad
+  var Batmobil = require('./models/Car.js');
+
+  // good
+  var Batmobil = require('./models/Car');
+```
 
 ## Declare one variable per var statement
 
