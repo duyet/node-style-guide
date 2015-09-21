@@ -3,7 +3,7 @@ This is a guide for writing consistent and aesthetically pleasing node.js code. 
 
 # Table of contents
 
-* [1 Tab for indention](#2-spaces-for-indention)
+* [1 Tab for indention](#1-tab-for-indention)
 * [Newlines](#newlines)
 * [Use Semicolons](#use-semicolons)
 * [80 characters per line](#80-characters-per-line)
