@@ -16,6 +16,7 @@ This is a guide for writing consistent and aesthetically pleasing node.js code. 
 * [Only throw in synchronous functions](#only-throw-in-synchronous-functions)
 * [Catch errors in sync calls](#catch-errors-in-sync-calls)
 * [Use FIXME: and TODO: comment to annotate problems](#use-fixme-and-todo-comment-to-annotate-problems)
+* [Whitespace rightway](#whitespace-rightway)
 * [Declare one variable per var statement](#declare-one-variable-per-var-statement)
 * [Use lowerCamelCase for variables, properties and function names](#use-lowercamelcase-for-variables-properties-and-function-names)
 * [Use UpperCamelCase for class names](#use-uppercamelcase-for-class-names)
@@ -321,6 +322,7 @@ try {
 Prefixing your comments with **FIXME** or **TODO** helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented.
 
 * Use `// FIXME:` to annotate problems
+
 ```js
 function Calculator() {
 
@@ -332,6 +334,7 @@ function Calculator() {
 ```
 
 * Use `// TODO:` to annotate solutions to problems
+
 ```js 
 function Calculator() {
 
@@ -340,6 +343,83 @@ function Calculator() {
 
   return this;
 }
+```
+
+## Whitespace rightway
+
+* Use soft tabs set to 2 spaces
+
+```js
+// bad
+function() {
+∙∙∙∙var name;
+}
+
+// bad
+function() {
+∙var name;
+}
+
+// good
+function() {
+∙∙var name;
+}
+```
+
+* Place 1 space before the leading brace.
+
+```js
+// bad
+function test(){
+  console.log('test');
+}
+
+// good
+function test() {
+  console.log('test');
+}
+
+// bad
+dog.set('attr',{
+  age: '1 year',
+  breed: 'Bernese Mountain Dog'
+});
+
+// good
+dog.set('attr', {
+  age: '1 year',
+  breed: 'Bernese Mountain Dog'
+});
+```
+
+* Set off operators with spaces.
+
+```js
+// bad
+var x=y+5;
+
+// good
+var x = y + 5;
+```
+
+* End files with a single newline character.
+
+```js
+// bad
+(function(global) {
+  // ...stuff...
+})(this);
+
+// bad
+(function(global) {
+  // ...stuff...
+})(this);↵
+↵
+
+// good
+(function(global) {
+  // ...stuff...
+})(this);↵
 ```
 
 ## Use lowerCamelCase for variables, properties and function names
