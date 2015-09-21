@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Node-style-guide by duyetdev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Node-style-guide</h1>
+      <h2 class="project-tagline">A guide for styling your node.js / JavaScript code. How duyetdev write Nodejs. Fork &amp; adjust to your taste.</h2>
+      <a href="https://github.com/duyetdev/node-style-guide" class="btn">View on GitHub</a>
+      <a href="https://github.com/duyetdev/node-style-guide/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/duyetdev/node-style-guide/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="nodejs-style-guide" class="anchor" href="#nodejs-style-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Node.js Style Guide</h1>
+
+<p>This is a guide for writing consistent and aesthetically pleasing node.js code. It is inspired by what is popular within the community, and flavored with some personal opinions.</p>
+
+<h1>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of contents</h1>
+
+<ul>
+<li><a href="#1-tab-for-indention">1 Tab for indention</a></li>
+<li><a href="#newlines">Newlines</a></li>
+<li><a href="#use-semicolons">Use Semicolons</a></li>
+<li><a href="#80-characters-per-line">80 characters per line</a></li>
+<li><a href="#use-single-quotes">Use single quotes</a></li>
+<li><a href="#opening-braces-go-on-the-same-line">Opening braces go on the same line</a></li>
+<li><a href="#method-chaining">Method chaining</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#requires">Requires</a></li>
+<li><a href="#always-check-for-errors-in-callbacks">Always check for errors in callbacks</a></li>
+<li><a href="#only-throw-in-synchronous-functions">Only throw in synchronous functions</a></li>
+<li><a href="#catch-errors-in-sync-calls">Catch errors in sync calls</a></li>
+<li><a href="#use-fixme-and-todo-comment-to-annotate-problems">Use FIXME: and TODO: comment to annotate problems</a></li>
+<li><a href="#whitespace-rightway">Whitespace rightway</a></li>
+<li><a href="#declare-one-variable-per-var-statement">Declare one variable per var statement</a></li>
+<li><a href="#use-lowercamelcase-for-variables-properties-and-function-names">Use lowerCamelCase for variables, properties and function names</a></li>
+<li><a href="#use-uppercamelcase-for-class-names">Use UpperCamelCase for class names</a></li>
+<li><a href="#use-uppercase-for-constants">Use UPPERCASE for Constants</a></li>
+<li><a href="#object--array-creation">Object / Array creation</a></li>
+<li><a href="#use-the--operator">Use the === operator</a></li>
+<li><a href="#use-multi-line-ternary-operator">Use multi-line ternary operator</a></li>
+<li><a href="#use-slashes-for-comments">Use slashes for comments</a></li>
+<li><a href="#objectfreeze-objectpreventextensions-objectseal-with-eval">Object.freeze, Object.preventExtensions, Object.seal, with, eval</a></li>
+<li><a href="#getters-and-setters">Getters and setters</a></li>
+</ul>
+
+<h2>
+<a id="1-tab-for-indention" class="anchor" href="#1-tab-for-indention" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 Tab for indention</h2>
+
+<p>Use 1 tab character for indenting your code and swear an oath to never mix tabs and spaces - a special kind of hell is awaiting you otherwise.</p>
+
+<h2>
+<a id="newlines" class="anchor" href="#newlines" aria-hidden="true"><span class="octicon octicon-link"></span></a>Newlines</h2>
+
+<p>Use UNIX-style newlines (<code>\n</code>), and a newline character as the last character 
+of a file. Windows-style newlines (<code>\r\n</code>) are forbidden inside any repository.</p>
+
+<h2>
+<a id="use-semicolons" class="anchor" href="#use-semicolons" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use Semicolons</h2>
+
+<p>According to <a href="http://news.ycombinator.com/item?id=1547647">scientific research</a>, the usage of semicolons is
+a core value of our community. Consider the points of <a href="http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding">the opposition</a>, but
+be a traditionalist when it comes to abusing error correction mechanisms for
+cheap syntactic pleasures.</p>
+
+<h2>
+<a id="80-characters-per-line" class="anchor" href="#80-characters-per-line" aria-hidden="true"><span class="octicon octicon-link"></span></a>80 characters per line</h2>
+
+<p>Limit your lines to 80 characters. Yes, screens have gotten much bigger over the
+last few years, but your brain has not. Use the additional room for split screen,
+your editor supports that, right?</p>
+
+<h2>
+<a id="use-single-quotes" class="anchor" href="#use-single-quotes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use single quotes</h2>
+
+<p>Use single quotes, unless you are writing JSON.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> foo <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>;</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> foo <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>bar<span class="pl-pds">"</span></span>;</pre></div>
+
+<h2>
+<a id="opening-braces-go-on-the-same-line" class="anchor" href="#opening-braces-go-on-the-same-line" aria-hidden="true"><span class="octicon octicon-link"></span></a>Opening braces go on the same line</h2>
+
+<p>Your opening braces go on the same line as the statement.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">if</span> (<span class="pl-c1">true</span>) {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>winning<span class="pl-pds">'</span></span>);
+}</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">if</span> (<span class="pl-c1">true</span>)
+{
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>losing<span class="pl-pds">'</span></span>);
+}</pre></div>
+
+<p>Also, notice the use of whitespace before and after the condition statement.</p>
+
+<h2>
+<a id="method-chaining" class="anchor" href="#method-chaining" aria-hidden="true"><span class="octicon octicon-link"></span></a>Method chaining</h2>
+
+<p>One method per line should be used if you want to chain methods.</p>
+
+<p>You should also indent these methods so it's easier to tell they are part of the same chain.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre>User
+  .findOne({ name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span> })
+  .populate(<span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>)
+  .<span class="pl-c1">exec</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">user</span>) {
+    <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+  });</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre>User
+.findOne({ name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span> })
+.populate(<span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>)
+.<span class="pl-c1">exec</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">user</span>) {
+  <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+});
+
+User.findOne({ name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span> })
+  .populate(<span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>)
+  .<span class="pl-c1">exec</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">user</span>) {
+    <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+  });
+
+User.findOne({ name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span> }).populate(<span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>)
+.<span class="pl-c1">exec</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">user</span>) {
+  <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+});
+
+User.findOne({ name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span> }).populate(<span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>)
+  .<span class="pl-c1">exec</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">user</span>) {
+    <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+  });</pre></div>
+
+<h2>
+<a id="functions" class="anchor" href="#functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Functions</h2>
+
+<ul>
+<li>Function expressions:</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// anonymous function expression</span>
+<span class="pl-k">var</span> <span class="pl-en">anonymous</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
+  <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+};
+
+<span class="pl-c">// named function expression</span>
+<span class="pl-k">var</span> <span class="pl-en">named</span> <span class="pl-k">=</span> <span class="pl-k">function</span> <span class="pl-en">named</span>() {
+  <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+};
+
+<span class="pl-c">// immediately-invoked function expression (IIFE)</span>
+(<span class="pl-k">function</span>() {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>Welcome to the Internet. Please follow me.<span class="pl-pds">'</span></span>);
+})();</pre></div>
+
+<ul>
+<li>Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead.</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// bad</span>
+<span class="pl-k">if</span> (currentUser) {
+  <span class="pl-k">function</span> <span class="pl-en">test</span>() {
+    <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>Nope.<span class="pl-pds">'</span></span>);
+  }
+}
+
+<span class="pl-c">// good</span>
+<span class="pl-k">var</span> test;
+<span class="pl-k">if</span> (currentUser) {
+  <span class="pl-en">test</span> <span class="pl-k">=</span> <span class="pl-k">function</span> <span class="pl-en">test</span>() {
+    <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>Yup.<span class="pl-pds">'</span></span>);
+  };
+}</pre></div>
+
+<ul>
+<li>Never name a parameter arguments, this will take precedence over the arguments object that is given to every function scope.</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// bad</span>
+<span class="pl-k">function</span> <span class="pl-en">nope</span>(<span class="pl-smi">name</span>, <span class="pl-smi">options</span>, <span class="pl-smi">arguments</span>) {
+  <span class="pl-c">// ...stuff...</span>
+}
+
+<span class="pl-c">// good</span>
+<span class="pl-k">function</span> <span class="pl-en">yup</span>(<span class="pl-smi">name</span>, <span class="pl-smi">options</span>, <span class="pl-smi">args</span>) {
+  <span class="pl-c">// ...stuff...</span>
+}</pre></div>
+
+<h2>
+<a id="requires" class="anchor" href="#requires" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requires</h2>
+
+<ul>
+<li>Organize your node requires in the following order:
+
+<ul>
+<li>core modules<br>
+</li>
+<li>npm modules</li>
+<li>others</li>
+</ul>
+</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// good</span>
+<span class="pl-k">var</span> http <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>http<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> fs <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>fs<span class="pl-pds">'</span></span>);
+
+<span class="pl-k">var</span> <span class="pl-k">async</span> <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>async<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> mongoose <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>mongoose<span class="pl-pds">'</span></span>);
+
+<span class="pl-k">var</span> Car <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>./models/Car<span class="pl-pds">'</span></span>);
+
+
+<span class="pl-c">// bad</span>
+<span class="pl-k">var</span> Car <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>./models/Car<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> <span class="pl-k">async</span> <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>async<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> http <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>http<span class="pl-pds">'</span></span>);</pre></div>
+
+<ul>
+<li>Do not use the .js when requiring modules</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre>  <span class="pl-c">// bad</span>
+  <span class="pl-k">var</span> Batmobil <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>./models/Car.js<span class="pl-pds">'</span></span>);
+
+  <span class="pl-c">// good</span>
+  <span class="pl-k">var</span> Batmobil <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>./models/Car<span class="pl-pds">'</span></span>);</pre></div>
+
+<h2>
+<a id="declare-one-variable-per-var-statement" class="anchor" href="#declare-one-variable-per-var-statement" aria-hidden="true"><span class="octicon octicon-link"></span></a>Declare one variable per var statement</h2>
+
+<p>Declare one variable per var statement, it makes it easier to re-order the
+lines. However, ignore <a href="http://javascript.crockford.com/code.html">Crockford</a> when it comes to
+declaring variables deeper inside a function, just put the declarations wherever
+they make sense.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> keys   <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>];
+<span class="pl-k">var</span> values <span class="pl-k">=</span> [<span class="pl-c1">23</span>, <span class="pl-c1">42</span>];
+
+<span class="pl-k">var</span> object <span class="pl-k">=</span> {};
+<span class="pl-k">while</span> (keys.<span class="pl-c1">length</span>) {
+  <span class="pl-k">var</span> key <span class="pl-k">=</span> keys.<span class="pl-c1">pop</span>();
+  object[key] <span class="pl-k">=</span> values.<span class="pl-c1">pop</span>();
+}</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> keys <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>],
+    values <span class="pl-k">=</span> [<span class="pl-c1">23</span>, <span class="pl-c1">42</span>],
+    object <span class="pl-k">=</span> {},
+    key;
+
+<span class="pl-k">while</span> (keys.<span class="pl-c1">length</span>) {
+  key <span class="pl-k">=</span> keys.<span class="pl-c1">pop</span>();
+  object[key] <span class="pl-k">=</span> values.<span class="pl-c1">pop</span>();
+}</pre></div>
+
+<h2>
+<a id="always-check-for-errors-in-callbacks" class="anchor" href="#always-check-for-errors-in-callbacks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Always check for errors in callbacks</h2>
+
+<p>Always check for errors and return if any errors in callbacks</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//bad</span>
+database.get(<span class="pl-s"><span class="pl-pds">'</span>pokemons<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">pokemons</span>) {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(pokemons);
+});
+
+<span class="pl-c">//good</span>
+database.get(<span class="pl-s"><span class="pl-pds">'</span>drabonballs<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">drabonballs</span>) {
+  <span class="pl-k">if</span> (err) {
+    <span class="pl-c">// handle the error somehow, maybe return with a callback</span>
+    <span class="pl-k">return</span> <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
+  }
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(drabonballs);
+});</pre></div>
+
+<h2>
+<a id="only-throw-in-synchronous-functions" class="anchor" href="#only-throw-in-synchronous-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Only throw in synchronous functions</h2>
+
+<p>Try-catch blocks cannot be used to wrap async code. They will bubble up to to the top, and bring down the entire process.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//bad</span>
+<span class="pl-k">function</span> <span class="pl-en">readPackageJson</span> (<span class="pl-smi">callback</span>) {
+  fs.readFile(<span class="pl-s"><span class="pl-pds">'</span>package.json<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">file</span>) {
+    <span class="pl-k">if</span> (err) {
+      <span class="pl-k">throw</span> err;
+    }
+    ...
+  });
+}
+
+<span class="pl-c">//good</span>
+<span class="pl-k">function</span> <span class="pl-en">readPackageJson</span> (<span class="pl-smi">callback</span>) {
+  fs.readFile(<span class="pl-s"><span class="pl-pds">'</span>package.json<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">file</span>) {
+    <span class="pl-k">if</span> (err) {
+      <span class="pl-c">// Return the callback error</span>
+      <span class="pl-k">return</span>  callback(err);
+    }
+    ...
+  });
+}</pre></div>
+
+<h2>
+<a id="catch-errors-in-sync-calls" class="anchor" href="#catch-errors-in-sync-calls" aria-hidden="true"><span class="octicon octicon-link"></span></a>Catch errors in sync calls</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//bad</span>
+<span class="pl-k">var</span> data <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(jsonAsAString);
+
+<span class="pl-c">//good</span>
+<span class="pl-k">var</span> data;
+<span class="pl-k">try</span> {
+  data <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(jsonAsAString);
+} <span class="pl-k">catch</span> (e) {
+  <span class="pl-c">//handle error - hopefully not with a console.log ;)</span>
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(e);
+}</pre></div>
+
+<h2>
+<a id="use-fixme-and-todo-comment-to-annotate-problems" class="anchor" href="#use-fixme-and-todo-comment-to-annotate-problems" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use <strong>FIXME:</strong> and <strong>TODO:</strong> comment to annotate problems</h2>
+
+<p>Prefixing your comments with <strong>FIXME</strong> or <strong>TODO</strong> helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented.</p>
+
+<ul>
+<li>Use <code>// FIXME:</code> to annotate problems</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">Calculator</span>() {
+
+  <span class="pl-c">// FIXME: shouldn't use a global here</span>
+  total <span class="pl-k">=</span> <span class="pl-c1">0</span>;
+
+  <span class="pl-k">return</span> <span class="pl-v">this</span>;
+}</pre></div>
+
+<ul>
+<li>Use <code>// TODO:</code> to annotate solutions to problems</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">Calculator</span>() {
+
+  <span class="pl-c">// TODO: total should be configurable by an options param</span>
+  <span class="pl-v">this</span>.total <span class="pl-k">=</span> <span class="pl-c1">0</span>;
+
+  <span class="pl-k">return</span> <span class="pl-v">this</span>;
+}</pre></div>
+
+<h2>
+<a id="whitespace-rightway" class="anchor" href="#whitespace-rightway" aria-hidden="true"><span class="octicon octicon-link"></span></a>Whitespace rightway</h2>
+
+<ul>
+<li>Use soft tabs set to 2 spaces</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// bad</span>
+<span class="pl-k">function</span>() {
+∙∙∙∙<span class="pl-k">var</span> name;
+}
+
+<span class="pl-c">// bad</span>
+<span class="pl-k">function</span>() {
+∙<span class="pl-k">var</span> name;
+}
+
+<span class="pl-c">// good</span>
+<span class="pl-k">function</span>() {
+∙∙<span class="pl-k">var</span> name;
+}</pre></div>
+
+<ul>
+<li>Place 1 space before the leading brace.</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// bad</span>
+<span class="pl-k">function</span> <span class="pl-en">test</span>(){
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>);
+}
+
+<span class="pl-c">// good</span>
+<span class="pl-k">function</span> <span class="pl-en">test</span>() {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>);
+}
+
+<span class="pl-c">// bad</span>
+dog.set(<span class="pl-s"><span class="pl-pds">'</span>attr<span class="pl-pds">'</span></span>,{
+  age<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>1 year<span class="pl-pds">'</span></span>,
+  breed<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Bernese Mountain Dog<span class="pl-pds">'</span></span>
+});
+
+<span class="pl-c">// good</span>
+dog.set(<span class="pl-s"><span class="pl-pds">'</span>attr<span class="pl-pds">'</span></span>, {
+  age<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>1 year<span class="pl-pds">'</span></span>,
+  breed<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Bernese Mountain Dog<span class="pl-pds">'</span></span>
+});</pre></div>
+
+<ul>
+<li>Set off operators with spaces.</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// bad</span>
+<span class="pl-k">var</span> x<span class="pl-k">=</span>y<span class="pl-k">+</span><span class="pl-c1">5</span>;
+
+<span class="pl-c">// good</span>
+<span class="pl-k">var</span> x <span class="pl-k">=</span> y <span class="pl-k">+</span> <span class="pl-c1">5</span>;</pre></div>
+
+<ul>
+<li>End files with a single newline character.</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// bad</span>
+(<span class="pl-k">function</span>(<span class="pl-smi">global</span>) {
+  <span class="pl-c">// ...stuff...</span>
+})(<span class="pl-v">this</span>);
+
+<span class="pl-c">// bad</span>
+(<span class="pl-k">function</span>(<span class="pl-smi">global</span>) {
+  <span class="pl-c">// ...stuff...</span>
+})(<span class="pl-v">this</span>);↵
+↵
+
+<span class="pl-c">// good</span>
+(<span class="pl-k">function</span>(<span class="pl-smi">global</span>) {
+  <span class="pl-c">// ...stuff...</span>
+})(<span class="pl-v">this</span>);↵</pre></div>
+
+<h2>
+<a id="use-lowercamelcase-for-variables-properties-and-function-names" class="anchor" href="#use-lowercamelcase-for-variables-properties-and-function-names" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use lowerCamelCase for variables, properties and function names</h2>
+
+<p>Variables, properties and function names should use <code>lowerCamelCase</code>.  They
+should also be descriptive. Single character variables and uncommon
+abbreviations should generally be avoided.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> adminUser <span class="pl-k">=</span> db.query(<span class="pl-s"><span class="pl-pds">'</span>SELECT * FROM users ...<span class="pl-pds">'</span></span>);</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> admin_user <span class="pl-k">=</span> db.query(<span class="pl-s"><span class="pl-pds">'</span>SELECT * FROM users ...<span class="pl-pds">'</span></span>);</pre></div>
+
+<h2>
+<a id="use-uppercamelcase-for-class-names" class="anchor" href="#use-uppercamelcase-for-class-names" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use UpperCamelCase for class names</h2>
+
+<p>Class names should be capitalized using <code>UpperCamelCase</code>.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">BankAccount</span>() {
+}</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">bank_Account</span>() {
+}</pre></div>
+
+<h2>
+<a id="use-uppercase-for-constants" class="anchor" href="#use-uppercase-for-constants" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use UPPERCASE for Constants</h2>
+
+<p>Constants should be declared as regular variables or static class properties,
+using all uppercase letters.</p>
+
+<p>Node.js / V8 actually supports mozilla's <a href="https://developer.mozilla.org/en/JavaScript/Reference/Statements/const">const</a> extension, but
+unfortunately that cannot be applied to class members, nor is it part of any
+ECMA standard.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> <span class="pl-c1">SECOND</span> <span class="pl-k">=</span> <span class="pl-c1">1</span> <span class="pl-k">*</span> <span class="pl-c1">1000</span>;
+
+<span class="pl-k">function</span> <span class="pl-en">File</span>() {
+}
+File.FULL_PERMISSIONS <span class="pl-k">=</span> <span class="pl-c1">0777</span>;</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">const</span> <span class="pl-c1">SECOND</span> <span class="pl-k">=</span> <span class="pl-c1">1</span> <span class="pl-k">*</span> <span class="pl-c1">1000</span>;
+
+<span class="pl-k">function</span> <span class="pl-en">File</span>() {
+}
+File.fullPermissions <span class="pl-k">=</span> <span class="pl-c1">0777</span>;</pre></div>
+
+<h2>
+<a id="object--array-creation" class="anchor" href="#object--array-creation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Object / Array creation</h2>
+
+<p>Use trailing commas and put <em>short</em> declarations on a single line. Only quote
+keys when your interpreter complains:</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> a <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">'</span>hello<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>world<span class="pl-pds">'</span></span>];
+<span class="pl-k">var</span> b <span class="pl-k">=</span> {
+  good<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>code<span class="pl-pds">'</span></span>,
+  <span class="pl-s"><span class="pl-pds">'</span>is generally<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>pretty<span class="pl-pds">'</span></span>,
+};</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> a <span class="pl-k">=</span> [
+  <span class="pl-s"><span class="pl-pds">'</span>hello<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>world<span class="pl-pds">'</span></span>
+];
+<span class="pl-k">var</span> b <span class="pl-k">=</span> {<span class="pl-s"><span class="pl-pds">"</span>good<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>code<span class="pl-pds">'</span></span>
+        , is generally<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>pretty<span class="pl-pds">'</span></span>
+        };</pre></div>
+
+<h2>
+<a id="use-the--operator" class="anchor" href="#use-the--operator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use the === operator</h2>
+
+<p>Programming is not about remembering <a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators/Comparison_Operators">stupid rules</a>. Use
+the triple equality operator as it will work just as expected.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> a <span class="pl-k">=</span> <span class="pl-c1">0</span>;
+<span class="pl-k">if</span> (a <span class="pl-k">!==</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>) {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>winning<span class="pl-pds">'</span></span>);
+}
+</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> a <span class="pl-k">=</span> <span class="pl-c1">0</span>;
+<span class="pl-k">if</span> (a <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>) {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>losing<span class="pl-pds">'</span></span>);
+}</pre></div>
+
+<h2>
+<a id="use-multi-line-ternary-operator" class="anchor" href="#use-multi-line-ternary-operator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use multi-line ternary operator</h2>
+
+<p>The ternary operator should not be used on a single line. Split it up into multiple lines instead.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> foo <span class="pl-k">=</span> (a <span class="pl-k">===</span> b)
+  <span class="pl-k">?</span> <span class="pl-c1">1</span>
+  <span class="pl-k">:</span> <span class="pl-c1">2</span>;</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> foo <span class="pl-k">=</span> (a <span class="pl-k">===</span> b) <span class="pl-k">?</span> <span class="pl-c1">1</span> <span class="pl-k">:</span> <span class="pl-c1">2</span>;</pre></div>
+
+<h2>
+<a id="do-not-extend-built-in-prototypes" class="anchor" href="#do-not-extend-built-in-prototypes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Do not extend built-in prototypes</h2>
+
+<p>Do not extend the prototype of native JavaScript objects. Your future self will
+be forever grateful.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> a <span class="pl-k">=</span> [];
+<span class="pl-k">if</span> (<span class="pl-k">!</span>a.<span class="pl-c1">length</span>) {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>winning<span class="pl-pds">'</span></span>);
+}</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c1">Array</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">empty</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
+  <span class="pl-k">return</span> <span class="pl-k">!</span><span class="pl-v">this</span>.<span class="pl-c1">length</span>;
+}
+
+<span class="pl-k">var</span> a <span class="pl-k">=</span> [];
+<span class="pl-k">if</span> (a.empty()) {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>losing<span class="pl-pds">'</span></span>);
+}</pre></div>
+
+<h2>
+<a id="use-descriptive-conditions" class="anchor" href="#use-descriptive-conditions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use descriptive conditions</h2>
+
+<p>Any non-trivial conditions should be assigned to a descriptively named variable or function:</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> isValidPassword <span class="pl-k">=</span> password.<span class="pl-c1">length</span> <span class="pl-k">&gt;=</span> <span class="pl-c1">4</span> <span class="pl-k">&amp;&amp;</span><span class="pl-sr"> <span class="pl-pds">/</span><span class="pl-k">^</span>(?=<span class="pl-c1">.</span><span class="pl-k">*</span><span class="pl-c1">\d</span>)<span class="pl-c1">.</span><span class="pl-k">{4,}</span><span class="pl-k">$</span><span class="pl-pds">/</span></span>.<span class="pl-c1">test</span>(password);
+
+<span class="pl-k">if</span> (isValidPassword) {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>winning<span class="pl-pds">'</span></span>);
+}</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">if</span> (password.<span class="pl-c1">length</span> <span class="pl-k">&gt;=</span> <span class="pl-c1">4</span> <span class="pl-k">&amp;&amp;</span><span class="pl-sr"> <span class="pl-pds">/</span><span class="pl-k">^</span>(?=<span class="pl-c1">.</span><span class="pl-k">*</span><span class="pl-c1">\d</span>)<span class="pl-c1">.</span><span class="pl-k">{4,}</span><span class="pl-k">$</span><span class="pl-pds">/</span></span>.<span class="pl-c1">test</span>(password)) {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>losing<span class="pl-pds">'</span></span>);
+}</pre></div>
+
+<h2>
+<a id="write-small-functions" class="anchor" href="#write-small-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Write small functions</h2>
+
+<p>Keep your functions short. A good function fits on a slide that the people in
+the last row of a big room can comfortably read. So don't count on them having
+perfect vision and limit yourself to ~15 lines of code per function.</p>
+
+<h2>
+<a id="return-early-from-functions" class="anchor" href="#return-early-from-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Return early from functions</h2>
+
+<p>To avoid deep nesting of if-statements, always return a function's value as early
+as possible.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">isPercentage</span>(<span class="pl-smi">val</span>) {
+  <span class="pl-k">if</span> (val <span class="pl-k">&lt;</span> <span class="pl-c1">0</span>) {
+    <span class="pl-k">return</span> <span class="pl-c1">false</span>;
+  }
+
+  <span class="pl-k">if</span> (val <span class="pl-k">&gt;</span> <span class="pl-c1">100</span>) {
+    <span class="pl-k">return</span> <span class="pl-c1">false</span>;
+  }
+
+  <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+}</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">isPercentage</span>(<span class="pl-smi">val</span>) {
+  <span class="pl-k">if</span> (val <span class="pl-k">&gt;=</span> <span class="pl-c1">0</span>) {
+    <span class="pl-k">if</span> (val <span class="pl-k">&lt;</span> <span class="pl-c1">100</span>) {
+      <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+    } <span class="pl-k">else</span> {
+      <span class="pl-k">return</span> <span class="pl-c1">false</span>;
+    }
+  } <span class="pl-k">else</span> {
+    <span class="pl-k">return</span> <span class="pl-c1">false</span>;
+  }
+}</pre></div>
+
+<p>Or for this particular example it may also be fine to shorten things even
+further:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">isPercentage</span>(<span class="pl-smi">val</span>) {
+  <span class="pl-k">var</span> isInRange <span class="pl-k">=</span> (val <span class="pl-k">&gt;=</span> <span class="pl-c1">0</span> <span class="pl-k">&amp;&amp;</span> val <span class="pl-k">&lt;=</span> <span class="pl-c1">100</span>);
+  <span class="pl-k">return</span> isInRange;
+}</pre></div>
+
+<h2>
+<a id="name-your-closures" class="anchor" href="#name-your-closures" aria-hidden="true"><span class="octicon octicon-link"></span></a>Name your closures</h2>
+
+<p>Feel free to give your closures a name. It shows that you care about them, and
+will produce better stack traces, heap and cpu profiles.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre>req.on(<span class="pl-s"><span class="pl-pds">'</span>end<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> <span class="pl-en">onEnd</span>() {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>winning<span class="pl-pds">'</span></span>);
+});</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre>req.on(<span class="pl-s"><span class="pl-pds">'</span>end<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>() {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>losing<span class="pl-pds">'</span></span>);
+});</pre></div>
+
+<h2>
+<a id="no-nested-closures" class="anchor" href="#no-nested-closures" aria-hidden="true"><span class="octicon octicon-link"></span></a>No nested closures</h2>
+
+<p>Use closures, but don't nest them. Otherwise your code will become a mess.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c1">setTimeout</span>(<span class="pl-k">function</span>() {
+  client.connect(afterConnect);
+}, <span class="pl-c1">1000</span>);
+
+<span class="pl-k">function</span> <span class="pl-en">afterConnect</span>() {
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>winning<span class="pl-pds">'</span></span>);
+}</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c1">setTimeout</span>(<span class="pl-k">function</span>() {
+  client.connect(<span class="pl-k">function</span>() {
+    <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>losing<span class="pl-pds">'</span></span>);
+  });
+}, <span class="pl-c1">1000</span>);</pre></div>
+
+<h2>
+<a id="use-slashes-for-comments" class="anchor" href="#use-slashes-for-comments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use slashes for comments</h2>
+
+<p>Use slashes for both single line and multi line comments. Try to write
+comments that explain higher level mechanisms or clarify difficult
+segments of your code. Don't use comments to restate trivial things.</p>
+
+<p><em>Right:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// 'ID_SOMETHING=VALUE' -&gt; ['ID_SOMETHING=VALUE', 'SOMETHING', 'VALUE']</span>
+<span class="pl-k">var</span> matches <span class="pl-k">=</span> item.<span class="pl-c1">match</span>(<span class="pl-sr"><span class="pl-pds">/</span>ID_(<span class="pl-c1">[<span class="pl-k">^</span><span class="pl-cce">\n</span>]</span><span class="pl-k">+</span>)=(<span class="pl-c1">[<span class="pl-k">^</span><span class="pl-cce">\n</span>]</span><span class="pl-k">+</span>)<span class="pl-pds">/</span></span>));
+
+<span class="pl-c">// This function has a nasty side effect where a failure to increment a</span>
+<span class="pl-c">// redis counter used for statistics will cause an exception. This needs</span>
+<span class="pl-c">// to be fixed in a later iteration.</span>
+<span class="pl-k">function</span> <span class="pl-en">loadUser</span>(<span class="pl-smi">id</span>, <span class="pl-smi">cb</span>) {
+  <span class="pl-c">// ...</span>
+}
+
+<span class="pl-k">var</span> isSessionValid <span class="pl-k">=</span> (session.expires <span class="pl-k">&lt;</span> <span class="pl-c1">Date</span>.now());
+<span class="pl-k">if</span> (isSessionValid) {
+  <span class="pl-c">// ...</span>
+}</pre></div>
+
+<p><em>Wrong:</em></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// Execute a regex</span>
+<span class="pl-k">var</span> matches <span class="pl-k">=</span> item.<span class="pl-c1">match</span>(<span class="pl-sr"><span class="pl-pds">/</span>ID_(<span class="pl-c1">[<span class="pl-k">^</span><span class="pl-cce">\n</span>]</span><span class="pl-k">+</span>)=(<span class="pl-c1">[<span class="pl-k">^</span><span class="pl-cce">\n</span>]</span><span class="pl-k">+</span>)<span class="pl-pds">/</span></span>);
+
+<span class="pl-c">// Usage: loadUser(5, function() { ... })</span>
+<span class="pl-k">function</span> <span class="pl-en">loadUser</span>(<span class="pl-smi">id</span>, <span class="pl-smi">cb</span>) {
+  <span class="pl-c">// ...</span>
+}
+
+<span class="pl-c">// Check if the session is valid</span>
+<span class="pl-k">var</span> isSessionValid <span class="pl-k">=</span> (session.expires <span class="pl-k">&lt;</span> <span class="pl-c1">Date</span>.now());
+<span class="pl-c">// If the session is valid</span>
+<span class="pl-k">if</span> (isSessionValid) {
+  <span class="pl-c">// ...</span>
+}</pre></div>
+
+<h2>
+<a id="objectfreeze-objectpreventextensions-objectseal-with-eval" class="anchor" href="#objectfreeze-objectpreventextensions-objectseal-with-eval" aria-hidden="true"><span class="octicon octicon-link"></span></a>Object.freeze, Object.preventExtensions, Object.seal, with, eval</h2>
+
+<p>Crazy shit that you will probably never need. Stay away from it.</p>
+
+<h2>
+<a id="getters-and-setters" class="anchor" href="#getters-and-setters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getters and setters</h2>
+
+<p>Do not use setters, they cause more problems for people who try to use your
+software than they can solve.</p>
+
+<p>Feel free to use getters that are free from <a href="http://en.wikipedia.org/wiki/Side_effect_(computer_science)">side effects</a>, like
+providing a length property for a collection class.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/duyetdev/node-style-guide">Node-style-guide</a> is maintained by <a href="https://github.com/duyetdev">duyetdev</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
